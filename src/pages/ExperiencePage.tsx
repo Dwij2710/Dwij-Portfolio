@@ -59,7 +59,7 @@ export default function ExperiencePage() {
   ]
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-16">
+    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-12">
       <PageHeader
         tag="03 // PROFESSIONAL EXPERIENCE"
         title="CAREER TRAJECTORY &"

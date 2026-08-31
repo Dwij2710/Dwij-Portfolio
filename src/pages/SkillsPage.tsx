@@ -16,7 +16,7 @@ export default function SkillsPage() {
   const [activeGroup, setActiveGroup] = useState<string | null>(null)
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-16">
+    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-12">
       <PageHeader
         tag="04 // TECHNICAL ECOSYSTEM"
         title="DWIJ'S PRODUCTION"

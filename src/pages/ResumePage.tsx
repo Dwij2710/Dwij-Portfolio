@@ -5,7 +5,7 @@ import PageHeader from '../components/PageHeader'
 
 export default function ResumePage() {
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-16">
+    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-12">
       <PageHeader
         tag="05 // OFFICIAL RESUME"
         title="VERIFIED CREDENTIALS &"

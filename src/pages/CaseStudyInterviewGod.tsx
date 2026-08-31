@@ -45,7 +45,7 @@ export default function CaseStudyInterviewGod() {
   const [activeNode, setActiveNode] = useState(archNodes[0])
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-16 pt-28 sm:pt-36">
+    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-12 pt-20 sm:pt-24">
       {/* Back Link */}
       <Link
         to="/projects"

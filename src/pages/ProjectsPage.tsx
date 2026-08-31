@@ -79,7 +79,7 @@ export default function ProjectsPage() {
     : allProjects.filter((p) => p.category === filter || filter === 'SYSTEMS' || filter === 'FULL-STACK')
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-16">
+    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-12">
       <PageHeader
         tag="02 // PORTFOLIO DISCOVERY"
         title="ENGINEERING THAT SOLVES"

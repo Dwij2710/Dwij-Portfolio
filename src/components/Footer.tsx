@@ -9,8 +9,8 @@ export default function Footer() {
   }
 
   return (
-    <footer className="mt-28 border-t border-white/[0.06] pt-16 pb-12 relative z-10 bg-[#04060A]">
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-12">
+    <footer className="mt-20 border-t border-white/[0.06] pt-12 pb-10 relative z-10 bg-[#04060A]">
+      <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-10">
         {/* Large Statement */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-white/10 pb-12">
           <div className="space-y-3">

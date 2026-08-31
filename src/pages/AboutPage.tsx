@@ -25,7 +25,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-20">
+    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-16">
       <PageHeader
         tag="01 // ABOUT DWIJ PRAJAPATI"
         title="ENGINEER. BUILDER."
