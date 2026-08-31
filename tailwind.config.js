@@ -20,19 +20,8 @@ export default {
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       maxWidth: {
-        container: '1200px',
-        content: '880px',
-      },
-      animation: {
-        'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 16s linear infinite',
-        'sound-wave': 'soundwave 1.2s ease-in-out infinite alternate',
-      },
-      keyframes: {
-        soundwave: {
-          '0%': { height: '4px' },
-          '100%': { height: '18px' },
-        },
+        container: '1400px',
+        content: '960px',
       },
     },
   },
