@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown, ChevronUp, Briefcase } from 'lucide-react'
+import { ChevronDown, ChevronUp, Layers } from 'lucide-react'
 import { experience } from '../lib/data'
 
 export default function Experience() {
@@ -10,8 +10,8 @@ export default function Experience() {
     <section id="experience" className="py-20 border-t border-hairline">
       <div className="max-w-content">
         <div className="flex items-center justify-between mb-8">
-          <p className="font-mono text-xs text-faint">// production experience</p>
-          <span className="font-mono text-[11px] text-muted">system incident & work log</span>
+          <p className="font-mono text-xs text-faint">// professional experience</p>
+          <span className="font-mono text-[11px] text-muted">production logs & architecture</span>
         </div>
 
         <div className="border-l border-hairline relative ml-2 sm:ml-4">
@@ -25,7 +25,7 @@ export default function Experience() {
                 <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] text-faint">
                   <span className="text-data">{job.date}</span>
                   <span>•</span>
-                  <span>Full-Stack AI Role</span>
+                  <span>AI & Backend Systems</span>
                 </div>
 
                 <h3 className="text-xl sm:text-2xl text-ink font-medium mt-1.5">
@@ -34,6 +34,12 @@ export default function Experience() {
                 <p className="font-mono text-sm text-signal mt-0.5 font-medium">
                   {job.org}
                 </p>
+
+                {job.projectsSubtitle && (
+                  <p className="font-mono text-xs text-muted/90 bg-panel2 border border-hairline px-3 py-1.5 rounded-sm mt-2.5 inline-block">
+                    {job.projectsSubtitle}
+                  </p>
+                )}
 
                 <p className="text-muted mt-3 max-w-[62ch] leading-relaxed text-sm sm:text-base">
                   {job.summary}
@@ -52,7 +58,7 @@ export default function Experience() {
                   ) : (
                     <>
                       <ChevronDown className="w-3.5 h-3.5 text-data" />
-                      <span>expand full engineering breakdown ({job.details.length} logs)</span>
+                      <span>expand all {job.details.length} engineering deliverables</span>
                     </>
                   )}
                 </button>
@@ -64,15 +70,15 @@ export default function Experience() {
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
-                      className="overflow-hidden mt-4 space-y-3 border-t border-hairline pt-4 max-w-[62ch] bg-panel/30 p-4 rounded-sm"
+                      className="overflow-hidden mt-4 space-y-3.5 border-t border-hairline pt-4 max-w-[64ch] bg-panel/40 p-4 sm:p-5 rounded-sm"
                     >
                       {job.details.map((d, idx) => (
                         <li
                           key={idx}
-                          className="text-sm text-muted leading-relaxed pl-5 relative font-mono text-[13px]"
+                          className="text-sm text-muted leading-relaxed pl-6 relative"
                         >
-                          <span className="absolute left-0 text-signal font-mono">[{idx + 1}]</span>
-                          <span className="text-ink font-sans text-sm">{d}</span>
+                          <span className="absolute left-0 text-signal font-mono text-xs">[{idx + 1}]</span>
+                          <span className="text-ink text-sm leading-relaxed">{d}</span>
                         </li>
                       ))}
                     </motion.ul>
