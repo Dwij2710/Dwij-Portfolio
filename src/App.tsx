@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
-import AwwwardsCursor from './components/AwwwardsCursor'
 import AskDwijAI from './components/AskDwijAI'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
@@ -45,7 +44,6 @@ export default function App() {
     <BrowserRouter>
       <div className="min-h-screen bg-[#04060A] text-primary relative selection:bg-violet-600/40 selection:text-white flex flex-col overflow-x-hidden font-sans">
         <ScrollToTop />
-        <AwwwardsCursor />
         <Navigation />
 
         <main className="flex-1 w-full relative z-10">
