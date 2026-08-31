@@ -9,15 +9,15 @@ export default function Footer() {
   }
 
   return (
-    <footer className="border-t border-hairline py-10 mt-16 max-w-content">
+    <footer className="border-t border-hairline py-10 mt-16 max-w-container mx-auto w-full">
       <div className="flex flex-col gap-6">
         {/* Navigation Map */}
         <div className="flex flex-wrap items-center gap-6 font-mono text-xs text-muted">
-          <Link to="/" className="hover:text-ink transition-colors">/home</Link>
-          <Link to="/about" className="hover:text-ink transition-colors">/about</Link>
-          <Link to="/experience" className="hover:text-ink transition-colors">/experience</Link>
-          <Link to="/projects" className="hover:text-ink transition-colors">/projects</Link>
-          <Link to="/contact" className="hover:text-ink transition-colors">/contact</Link>
+          <Link to="/" className="hover:text-signal transition-colors">/home</Link>
+          <Link to="/about" className="hover:text-signal transition-colors">/about</Link>
+          <Link to="/experience" className="hover:text-signal transition-colors">/experience</Link>
+          <Link to="/projects" className="hover:text-signal transition-colors">/projects</Link>
+          <Link to="/contact" className="hover:text-signal transition-colors">/contact</Link>
         </div>
 
         {/* Bottom Details */}
