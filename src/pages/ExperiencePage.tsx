@@ -1,9 +1,65 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Cpu, Server, Activity, ShieldCheck, Database, Cloud, Zap, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Cpu, Server, Activity, ShieldCheck, Database, Cloud, Zap, CheckCircle2, Waves, GitBranch, Terminal } from 'lucide-react'
 import { experience, metrics } from '../lib/data'
 
 export default function ExperiencePage() {
   const job = experience[0]
+
+  // Structured into 4 distinct production architecture pillars
+  const pillars = [
+    {
+      id: 'voice-agent',
+      icon: Waves,
+      accent: 'signal',
+      tag: 'SUB-SECOND LATENCY',
+      title: 'Real-Time Voice AI Agent & WebRTC Pipeline',
+      subtitle: 'LiveKit SFU (WebRTC) • GPT-4o • ElevenLabs • Sarvam AI',
+      points: [
+        'Architected an asynchronous event-driven real-time voice AI pipeline leveraging LiveKit SFU (WebRTC), OpenAI GPT-4o, ElevenLabs, and Sarvam AI, implementing semantic turn-taking, acoustic VAD filtering, and pre-generated audio warmup gates to achieve sub-second conversational latency.',
+        'Engineered an adaptive multi-turn dialog state machine with heuristic repeat-request and filler-word interceptors, enforcing bounded per-topic counter-probing and contextual conversational scaffolding to eliminate topic drift and prevent task stalls.',
+      ],
+      stack: ['LiveKit SFU', 'WebRTC', 'OpenAI GPT-4o', 'ElevenLabs', 'Sarvam AI', 'Acoustic VAD', 'Turn-Taking'],
+    },
+    {
+      id: 'evaluation-governance',
+      icon: ShieldCheck,
+      accent: 'data',
+      tag: 'FAIL-OPEN RESILIENCY',
+      title: 'LLM-as-a-Judge Evaluation & 4-Layer Governance',
+      subtitle: 'Deterministic Call Screening & Multilingual Quality Assurance',
+      points: [
+        'Developed an LLM-as-a-Judge answer-validity gate (gpt-4o-mini) with fail-open resiliency to intercept STT hallucinations and non-answers, resolving mathematical denominator inflation bugs in weighted skill aggregation algorithms by penalizing invalid responses and normalizing zero-score distributions.',
+        'Audited a four-layer deterministic candidate evaluation and call-screening pipeline (Scenario Detection, Telemetry, Semantic Intelligence, Policy Engine, Governance), resolving 20+ edge cases across multilingual (Hindi/English) speech pipelines, brittle speaker-attribution logic, telemetry constant drifts, and silent fallbacks.',
+      ],
+      stack: ['gpt-4o-mini', 'LLM-as-a-Judge', 'Bilingual Hindi/English', 'Policy Governance', 'Deterministic Scoring'],
+    },
+    {
+      id: 'state-decision',
+      icon: Database,
+      accent: 'signal',
+      tag: 'ZERO DATA LOSS',
+      title: 'Distributed Session Checkpointing & Hiring Decision Engine',
+      subtitle: 'Redis 24h Buffer • Multi-Modal Signal Weighted Aggregation',
+      points: [
+        'Engineered a distributed session state and checkpointing architecture using Redis with 24-hour handoff buffers, enabling zero-data-loss disconnect/reconnect recovery for active sessions alongside bidirectional webhook synchronization to core microservices.',
+        'Constructed a multi-modal weighted aggregation engine consolidating Resume, Screening Call, Assessment, Technical Interview, and Integrity signals into automated PROCEED / HOLD / REJECT hiring recommendations with calibrated confidence scoring.',
+      ],
+      stack: ['Redis Checkpointing', '24h State Buffer', 'Webhooks', 'Multi-Modal Aggregation', 'Confidence Calibration'],
+    },
+    {
+      id: 'cloud-infrastructure',
+      icon: Cloud,
+      accent: 'data',
+      tag: 'PRODUCTION CLOUD',
+      title: 'AWS EC2 Infrastructure, Docker Stacks & CI/CD Pipelines',
+      subtitle: 'Containerized Deployment • Caddy TLS • IAM OIDC Delegations',
+      points: [
+        'Containerized and deployed multi-service production stacks across AWS EC2 utilizing Docker Compose and Caddy reverse proxies with automated SSL/TLS termination, supporting multi-stage Serverless framework migrations across AWS accounts with IAM OIDC role delegations and CodeBuild CI/CD pipelines.',
+      ],
+      stack: ['AWS EC2', 'Docker Compose', 'Caddy Reverse Proxy', 'TLS/SSL', 'Serverless', 'IAM OIDC', 'AWS CodeBuild'],
+    },
+  ]
 
   return (
     <div className="py-8 md:py-12 max-w-container mx-auto">
@@ -14,14 +70,14 @@ export default function ExperiencePage() {
           Systems & Voice AI Infrastructure
         </h1>
         <p className="font-mono text-sm text-data mt-2">
-          Production Architecture behind InterviewGod.ai • Real-time Multimodal Evaluation
+          Production Architecture behind InterviewGod.ai • Real-Time Multimodal Evaluation
         </p>
       </div>
 
-      {/* Highlight Metrics */}
+      {/* Live Telemetry Metrics Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {metrics.map((m) => (
-          <div key={m.label} className="p-4 bg-panel border border-hairline rounded-sm shadow-sm">
+          <div key={m.label} className="p-4 bg-panel border border-hairline rounded-sm shadow-sm hover:border-signal/40 transition-colors">
             <p className="font-mono text-[10px] text-faint uppercase">{m.label}</p>
             <p className="mt-1 text-2xl font-medium font-mono text-ink">{m.value}</p>
             <p className="font-mono text-[11px] text-data mt-0.5">{m.unit}</p>
@@ -29,9 +85,9 @@ export default function ExperiencePage() {
         ))}
       </div>
 
-      {/* Main Role Header Card */}
-      <section className="bg-panel border border-hairline p-6 sm:p-8 rounded-sm shadow-sm mb-10 space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-hairline pb-4">
+      {/* Role Overview Executive Card */}
+      <section className="bg-panel border border-hairline p-6 sm:p-8 rounded-sm shadow-sm mb-12 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-signal status-dot" />
@@ -45,53 +101,113 @@ export default function ExperiencePage() {
             </p>
           </div>
 
-          <div className="bg-panel2 border border-hairline px-3.5 py-2 rounded-sm font-mono text-xs text-muted">
-            AWS EC2 • LiveKit SFU • Docker Compose • Caddy TLS
+          <div className="flex flex-wrap gap-2 font-mono text-xs">
+            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-muted">
+              LiveKit SFU
+            </span>
+            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-muted">
+              FastAPI
+            </span>
+            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-muted">
+              Redis State
+            </span>
+            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-muted">
+              AWS EC2
+            </span>
           </div>
         </div>
 
-        {job.projectsSubtitle && (
-          <div className="p-3.5 bg-panel2 border border-hairline rounded-sm">
-            <p className="font-mono text-xs text-muted leading-relaxed">
-              <span className="text-signal font-semibold">Core Scope: </span>
-              {job.projectsSubtitle}
-            </p>
-          </div>
-        )}
+        {/* Project Scope Banner */}
+        <div className="p-3.5 bg-panel2 border border-hairline rounded-sm flex items-start gap-2.5">
+          <Terminal className="w-4 h-4 text-signal shrink-0 mt-0.5" />
+          <p className="font-mono text-xs text-muted leading-relaxed">
+            <span className="text-signal font-semibold">Core Scope: </span>
+            {job.projectsSubtitle}
+          </p>
+        </div>
 
-        <p className="text-muted text-base leading-relaxed max-w-3xl">
+        <p className="text-muted text-base leading-relaxed max-w-4xl">
           {job.summary}
         </p>
       </section>
 
-      {/* 7 Engineering Deliverables Cards */}
-      <section className="mb-12">
-        <div className="flex items-center justify-between mb-6">
+      {/* 4 Thematic Architecture Pillars */}
+      <section className="mb-14 space-y-6">
+        <div className="flex items-center justify-between border-b border-hairline pb-4">
           <div>
-            <p className="font-mono text-xs text-faint mb-1">// engineering deliverables</p>
-            <h3 className="text-2xl font-medium text-ink">
-              Architectural Breakdown & Execution Logs
+            <p className="font-mono text-xs text-faint mb-1">// architecture deep-dive</p>
+            <h3 className="text-2xl sm:text-3xl font-medium text-ink">
+              Core Engineering Deliverables & Pillars
             </h3>
           </div>
-          <span className="font-mono text-xs text-muted">7 production milestones</span>
+          <span className="font-mono text-xs text-muted">4 Dedicated Architectural Areas</span>
         </div>
 
-        <div className="space-y-4">
-          {job.details.map((deliverable, idx) => (
-            <div
-              key={idx}
-              className="p-5 sm:p-6 bg-panel border border-hairline rounded-sm hover:border-signal/50 transition-all shadow-sm flex items-start gap-4"
-            >
-              <div className="p-2 bg-panel2 border border-hairline rounded font-mono text-xs font-bold text-signal shrink-0 mt-0.5">
-                #{String(idx + 1).padStart(2, '0')}
+        <div className="grid md:grid-cols-2 gap-6">
+          {pillars.map((pillar, idx) => {
+            const Icon = pillar.icon
+            const isSignal = pillar.accent === 'signal'
+
+            return (
+              <div
+                key={pillar.id}
+                className="bg-panel border border-hairline p-6 sm:p-7 rounded-sm hover:border-signal/50 transition-all shadow-sm flex flex-col justify-between space-y-5"
+              >
+                <div className="space-y-4">
+                  {/* Card Header */}
+                  <div className="flex items-start justify-between gap-3 border-b border-hairline pb-3">
+                    <div className="flex items-center gap-3">
+                      <div className={`p-2 bg-panel2 border border-hairline rounded-sm ${isSignal ? 'text-signal' : 'text-data'}`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <span className="font-mono text-[10px] text-faint">PILLAR 0{idx + 1}</span>
+                        <h4 className="text-lg font-medium text-ink leading-snug">
+                          {pillar.title}
+                        </h4>
+                      </div>
+                    </div>
+                    <span className={`font-mono text-[10px] font-semibold px-2 py-0.5 rounded shrink-0 ${
+                      isSignal ? 'text-signal bg-signal/10' : 'text-data bg-data/10'
+                    }`}>
+                      {pillar.tag}
+                    </span>
+                  </div>
+
+                  <p className="font-mono text-xs text-data">
+                    {pillar.subtitle}
+                  </p>
+
+                  {/* Bullet points */}
+                  <div className="space-y-3 pt-1">
+                    {pillar.points.map((point, pIdx) => (
+                      <div key={pIdx} className="flex items-start gap-2.5 text-sm text-ink leading-relaxed">
+                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-1 ${isSignal ? 'text-signal' : 'text-data'}`} />
+                        <p className="text-muted leading-relaxed font-sans">
+                          {point}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tech Chips */}
+                <div className="pt-4 border-t border-hairline space-y-2">
+                  <p className="font-mono text-[10px] text-faint uppercase">Technologies Involved</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {pillar.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="font-mono text-[11px] text-muted bg-panel2 border border-hairline rounded-sm px-2 py-0.5 hover:text-ink transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div className="space-y-1">
-                <p className="text-sm sm:text-base text-ink leading-relaxed font-sans">
-                  {deliverable}
-                </p>
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
 
