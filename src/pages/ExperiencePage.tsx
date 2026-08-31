@@ -6,7 +6,6 @@ import { experience, metrics } from '../lib/data'
 export default function ExperiencePage() {
   const job = experience[0]
 
-  // Structured into 4 distinct production architecture pillars
   const pillars = [
     {
       id: 'voice-agent',
@@ -62,14 +61,14 @@ export default function ExperiencePage() {
   ]
 
   return (
-    <div className="py-8 md:py-12 max-w-container mx-auto">
+    <div className="py-8 md:py-12 max-w-7xl mx-auto w-full px-4 sm:px-6">
       {/* Header */}
       <div className="mb-10 border-b border-hairline pb-6">
-        <p className="font-mono text-xs text-signal mb-2 font-semibold">// 02. production experience & telemetry</p>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-ink">
+        <p className="font-mono text-xs text-signal font-bold mb-2 uppercase tracking-widest">// 02. production experience & telemetry</p>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
           Systems & Voice AI Infrastructure
         </h1>
-        <p className="font-mono text-sm text-data mt-2 font-medium">
+        <p className="font-mono text-sm sm:text-base text-data mt-2 font-semibold">
           Production Architecture behind InterviewGod.ai • Real-Time Multimodal Evaluation
         </p>
       </div>
@@ -78,55 +77,55 @@ export default function ExperiencePage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {metrics.map((m) => (
           <div key={m.label} className="p-4 bg-panel border border-hairline rounded-sm shadow-sm hover:border-signal/50 transition-colors">
-            <p className="font-mono text-[10px] text-faint uppercase font-semibold">{m.label}</p>
-            <p className="mt-1 text-2xl font-bold font-mono text-ink">{m.value}</p>
-            <p className="font-mono text-xs text-data mt-0.5 font-medium">{m.unit}</p>
+            <p className="font-mono text-xs text-slate-400 uppercase font-bold">{m.label}</p>
+            <p className="mt-1 text-2xl sm:text-3xl font-bold font-mono text-white">{m.value}</p>
+            <p className="font-mono text-xs text-data mt-1 font-semibold">{m.unit}</p>
           </div>
         ))}
       </div>
 
       {/* Role Overview Executive Card */}
-      <section className="bg-panel border border-hairline p-6 sm:p-8 rounded-sm shadow-xl mb-12 space-y-5">
+      <section className="bg-panel border border-hairline p-6 sm:p-8 rounded-sm shadow-2xl mb-12 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-signal status-dot" />
               <span className="font-mono text-xs text-data font-bold">{job.date}</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl text-ink font-semibold mt-1">
+            <h2 className="text-2xl sm:text-3xl text-white font-bold mt-1">
               {job.role}
             </h2>
-            <p className="font-mono text-base text-signal font-semibold">
+            <p className="font-mono text-base text-signal font-bold">
               {job.org}
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2 font-mono text-xs">
-            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-ink font-medium">
+            <span className="px-3.5 py-1.5 bg-panel2 border border-hairline rounded-sm text-white font-semibold">
               LiveKit SFU
             </span>
-            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-ink font-medium">
+            <span className="px-3.5 py-1.5 bg-panel2 border border-hairline rounded-sm text-white font-semibold">
               FastAPI
             </span>
-            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-ink font-medium">
+            <span className="px-3.5 py-1.5 bg-panel2 border border-hairline rounded-sm text-white font-semibold">
               Redis State
             </span>
-            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-ink font-medium">
+            <span className="px-3.5 py-1.5 bg-panel2 border border-hairline rounded-sm text-white font-semibold">
               AWS EC2
             </span>
           </div>
         </div>
 
         {/* Project Scope Banner */}
-        <div className="p-4 bg-panel2 border border-hairline rounded-sm flex items-start gap-2.5">
-          <Terminal className="w-4 h-4 text-signal shrink-0 mt-0.5" />
-          <p className="font-mono text-xs text-ink leading-relaxed">
+        <div className="p-4 bg-panel2 border border-hairline rounded-sm flex items-start gap-3">
+          <Terminal className="w-5 h-5 text-signal shrink-0 mt-0.5" />
+          <p className="font-mono text-xs sm:text-sm text-white leading-relaxed font-medium">
             <span className="text-signal font-bold">Core Scope: </span>
             {job.projectsSubtitle}
           </p>
         </div>
 
-        <p className="text-ink text-base leading-relaxed max-w-4xl font-normal">
+        <p className="text-white text-base sm:text-lg leading-relaxed max-w-5xl font-normal">
           {job.summary}
         </p>
       </section>
@@ -135,8 +134,8 @@ export default function ExperiencePage() {
       <section className="mb-14 space-y-6">
         <div className="flex items-center justify-between border-b border-hairline pb-4">
           <div>
-            <p className="font-mono text-xs text-signal mb-1 font-semibold">// architecture deep-dive</p>
-            <h3 className="text-2xl sm:text-3xl font-semibold text-ink">
+            <p className="font-mono text-xs text-signal mb-1 font-bold uppercase tracking-wider">// architecture deep-dive</p>
+            <h3 className="text-2xl sm:text-3xl font-bold text-white">
               Core Engineering Deliverables & Pillars
             </h3>
           </div>
@@ -151,39 +150,39 @@ export default function ExperiencePage() {
             return (
               <div
                 key={pillar.id}
-                className="bg-panel border border-hairline p-6 sm:p-7 rounded-sm hover:border-signal/50 transition-all shadow-md flex flex-col justify-between space-y-5"
+                className="bg-panel border border-hairline p-6 sm:p-8 rounded-sm hover:border-signal/50 transition-all shadow-xl flex flex-col justify-between space-y-5"
               >
                 <div className="space-y-4">
                   {/* Card Header */}
-                  <div className="flex items-start justify-between gap-3 border-b border-hairline pb-3">
+                  <div className="flex items-start justify-between gap-3 border-b border-hairline pb-4">
                     <div className="flex items-center gap-3">
-                      <div className={`p-2.5 bg-panel2 border border-hairline rounded-sm ${isSignal ? 'text-signal' : 'text-data'}`}>
+                      <div className={`p-3 bg-panel2 border border-hairline rounded-sm ${isSignal ? 'text-signal' : 'text-data'}`}>
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="font-mono text-[10px] text-faint font-bold">PILLAR 0{idx + 1}</span>
-                        <h4 className="text-lg font-semibold text-ink leading-snug">
+                        <span className="font-mono text-xs text-slate-400 font-bold">PILLAR 0{idx + 1}</span>
+                        <h4 className="text-lg sm:text-xl font-bold text-white leading-snug">
                           {pillar.title}
                         </h4>
                       </div>
                     </div>
-                    <span className={`font-mono text-[10px] font-bold px-2.5 py-1 rounded shrink-0 border ${
-                      isSignal ? 'text-signal bg-signal/15 border-signal/30' : 'text-data bg-data/15 border-data/30'
+                    <span className={`font-mono text-xs font-bold px-3 py-1 rounded shrink-0 border ${
+                      isSignal ? 'text-signal bg-signal/15 border-signal/40' : 'text-data bg-data/15 border-data/40'
                     }`}>
                       {pillar.tag}
                     </span>
                   </div>
 
-                  <p className="font-mono text-xs text-data font-semibold">
+                  <p className="font-mono text-xs text-data font-bold">
                     {pillar.subtitle}
                   </p>
 
                   {/* Bullet points */}
-                  <div className="space-y-3 pt-1">
+                  <div className="space-y-3.5 pt-1">
                     {pillar.points.map((point, pIdx) => (
-                      <div key={pIdx} className="flex items-start gap-2.5 text-sm text-ink leading-relaxed">
-                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-1 ${isSignal ? 'text-signal' : 'text-data'}`} />
-                        <p className="text-ink text-sm sm:text-[15px] leading-relaxed font-normal">
+                      <div key={pIdx} className="flex items-start gap-3 text-sm sm:text-base leading-relaxed">
+                        <CheckCircle2 className={`w-5 h-5 shrink-0 mt-0.5 ${isSignal ? 'text-signal' : 'text-data'}`} />
+                        <p className="text-white text-sm sm:text-base leading-relaxed font-normal">
                           {point}
                         </p>
                       </div>
@@ -193,12 +192,12 @@ export default function ExperiencePage() {
 
                 {/* Tech Chips */}
                 <div className="pt-4 border-t border-hairline space-y-2">
-                  <p className="font-mono text-[11px] text-faint font-bold uppercase">Technologies Involved</p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <p className="font-mono text-xs text-data font-bold uppercase">Technologies Involved</p>
+                  <div className="flex flex-wrap gap-2">
                     {pillar.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="font-mono text-xs text-ink font-medium bg-panel2 border border-hairline rounded-sm px-2.5 py-1 hover:text-signal hover:border-signal/40 transition-colors"
+                        className="font-mono text-xs text-white font-semibold bg-panel2 border border-hairline rounded-sm px-3 py-1 hover:text-signal hover:border-signal/40 transition-colors"
                       >
                         {tech}
                       </span>
@@ -215,13 +214,13 @@ export default function ExperiencePage() {
       <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-hairline pt-6">
         <Link
           to="/about"
-          className="px-5 py-2.5 border border-hairline text-ink hover:text-signal font-mono text-xs rounded-sm hover:border-signal transition-colors font-semibold"
+          className="px-5 py-2.5 border border-hairline text-white hover:text-signal font-mono text-xs rounded-sm hover:border-signal transition-colors font-semibold"
         >
           <span>← About & Stack</span>
         </Link>
         <Link
           to="/projects"
-          className="px-5 py-2.5 bg-signal text-base font-mono text-xs font-bold rounded-sm hover:bg-signal/90 transition-all flex items-center gap-2"
+          className="px-5 py-2.5 bg-signal text-base font-mono text-xs font-bold rounded-sm hover:bg-signal/90 transition-all flex items-center gap-2 shadow-md"
         >
           <span>Next: Engineering Projects</span>
           <ArrowRight className="w-4 h-4" />
