@@ -1,0 +1,112 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 2616 >>
+stream
+BT
+/F1 16 Tf
+50 780 Td
+(DWIJ PRAJAPATI) Tj
+/F1 10 Tf
+0 -18 Td
+(AI & Backend Engineer  |  dwijprajapati46476@gmail.com  |  +91-9979246476) Tj
+0 -14 Td
+(GitHub: github.com/dwijprajapati  |  LinkedIn: linkedin.com/in/dwij-prajapati) Tj
+0 -22 Td
+0 -6 Td
+/F2 11 Tf
+0 -18 Td
+(SUMMARY) Tj
+/F1 9 Tf
+0 -12 Td
+(AI & Backend Engineer building real-time voice AI agents, LLM-as-a-Judge evaluation pipelines,) Tj
+0 -12 Td
+(and high-performance ML platforms with sub-second latency and resilient stateful architecture.) Tj
+0 -6 Td
+/F2 11 Tf
+0 -18 Td
+(EXPERIENCE) Tj
+/F1 9 Tf
+0 -12 Td
+(Banao Technologies \(InterviewGod.ai\)  AI Developer Intern \(Feb 2026 - Present\)) Tj
+0 -12 Td
+(- Architected event-driven voice pipeline on LiveKit \(WebRTC\), GPT-4o, ElevenLabs and Sarvam AI \(<1s latency\).) Tj
+0 -12 Td
+(- Designed adaptive multi-turn dialog state machine with repeat-request & filler-word interceptors.) Tj
+0 -12 Td
+(- Built LLM-as-a-Judge validity gate \(gpt-4o-mini\) with fail-open resiliency to eliminate hallucinations.) Tj
+0 -12 Td
+(- Engineered Redis-backed session checkpointing with 24-hour buffer for zero-data-loss reconnects.) Tj
+0 -12 Td
+(- Deployed multi-service Docker Compose stacks to AWS EC2 with Caddy TLS and CI/CD pipelines.) Tj
+0 -6 Td
+/F2 11 Tf
+0 -18 Td
+(PROJECTS) Tj
+/F1 9 Tf
+0 -12 Td
+(FinSight AI  Quantitative Intelligence & Trading Platform) Tj
+0 -12 Td
+(- Combined SARIMAX, regularized LSTM/MLP networks, and FinBERT sentiment scoring.) Tj
+0 -12 Td
+(- Built MDP trading environment training PPO, A2C, and DQN reinforcement learning agents.) Tj
+0 -12 Td
+(- Generated Efficient Frontier via SLSQP Markowitz optimization and 10,000+ Monte Carlo runs.) Tj
+0 -6 Td
+0 -12 Td
+(CompInsight AI  Enterprise ML Compensation Modeling Engine) Tj
+0 -12 Td
+(- Benchmarked CatBoost, LightGBM, and XGBoost with Optuna Bayesian hyperparameter search.) Tj
+0 -12 Td
+(- Achieved 0.93 R-squared score with 22% reduction in RMSE over baseline regression.) Tj
+0 -12 Td
+(- Exposed feature attribution with SHAP TreeExplainer and served sub-40ms P99 inference via FastAPI.) Tj
+0 -6 Td
+/F2 11 Tf
+0 -18 Td
+(TECHNICAL SKILLS) Tj
+/F1 9 Tf
+0 -12 Td
+(Languages: Python, C++, C, JavaScript, TypeScript, SQL, Bash/Shell) Tj
+0 -12 Td
+(AI & ML: LLM Orchestration, Prompt Scaffolding, LiveKit WebRTC, STT/TTS, Scikit-learn, TensorFlow) Tj
+0 -12 Td
+(Backend & Cloud: FastAPI, Django, Asyncio, Redis, PostgreSQL, Docker, AWS \(EC2, S3\), Git, Pytest) Tj
+0 -6 Td
+/F2 11 Tf
+0 -18 Td
+(EDUCATION) Tj
+/F1 9 Tf
+0 -12 Td
+(B.Tech in Computer Engineering  G.H. Patel College of Engineering \(2022 - 2026\) | CGPA 8.18 / 10) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000002918 00000 n 
+0000002988 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3063
+%%EOF

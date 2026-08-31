@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Dark console theme (default) */
+  --color-base: 11 14 19;
+  --color-panel: 18 22 29;
+  --color-panel2: 22 27 36;
+  --color-hairline: 35 40 51;
+  --color-ink: 232 234 237;
+  --color-muted: 139 146 160;
+  --color-faint: 86 93 107;
+  --color-signal: 255 138 61;
+  --color-data: 79 209 197;
+  --glow-color: rgba(255, 138, 61, 0.08);
+}
+
+html.light {
+  /* Light technical blueprint theme */
+  --color-base: 246 248 250;
+  --color-panel: 255 255 255;
+  --color-panel2: 241 245 249;
+  --color-hairline: 226 232 240;
+  --color-ink: 15 23 42;
+  --color-muted: 71 85 105;
+  --color-faint: 148 163 184;
+  --color-signal: 234 88 12;
+  --color-data: 13 148 136;
+  --glow-color: rgba(234, 88, 12, 0.05);
+}
+
+* {
+  scroll-behavior: smooth;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  background-color: rgb(var(--color-base));
+  color: rgb(var(--color-ink));
+  font-family: 'Instrument Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgb(var(--color-signal));
+  color: rgb(var(--color-base));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-base));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-hairline));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-faint));
+}
+
+.status-dot {
+  box-shadow: 0 0 0 3px rgba(255, 138, 61, 0.15);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+html.light .status-dot {
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--color-signal));
+  outline-offset: 3px;
+}
+
+/* Glass panel effect */
+.glass-panel {
+  background-color: rgb(var(--color-panel) / 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgb(var(--color-hairline));
+}
+
+/* Subtle grid pattern overlay */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgb(var(--color-hairline) / 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--color-hairline) / 0.3) 1px, transparent 1px);
+}
