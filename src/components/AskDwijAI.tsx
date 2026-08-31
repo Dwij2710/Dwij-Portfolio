@@ -1,52 +1,64 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sparkles, MessageSquare, X, Send, Bot, User, ArrowRight, Check, CornerDownLeft } from 'lucide-react'
-import { profile, experience, projects, skillGroups, education, metrics } from '../lib/data'
+import { Sparkles, X, Send, Bot, User } from 'lucide-react'
+import { profile, experience, skillGroups, education, metrics } from '../lib/data'
+
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || ''
 
 interface ChatMessage {
   id: string
-  role: 'user' | 'assistant'
+  role: 'user' | 'assistant' | 'system'
   content: string
 }
 
 const suggestedPrompts = [
   'What did Dwij build at Banao / InterviewGod.ai?',
-  'Explain the Voice AI & WebRTC pipeline',
+  'Explain the Voice AI WebRTC pipeline',
   'Tell me about FinSight AI and RL trading',
   'What is Dwij\'s core backend tech stack?',
   'How do I get in touch with Dwij?',
 ]
 
-// Accurate knowledge base matching engine (Zero Hallucinations)
-function getVerifiedAnswer(query: string): string {
-  const q = query.toLowerCase()
+// System prompt constructed from verified portfolio data
+const SYSTEM_PROMPT = `You are Dwij's official Portfolio AI Assistant. Answer questions accurately, concisely, and professionally on behalf of Dwij Prajapati based strictly on the verified information below.
 
-  if (q.includes('banao') || q.includes('interviewgod') || q.includes('voice') || q.includes('webrtc') || q.includes('latency')) {
-    return `At Banao Technologies, Dwij architected the production real-time voice AI pipeline for InterviewGod.ai. Key deliverables include:\n\n• Achieved sub-second (<1s) conversational latency using LiveKit SFU (WebRTC), OpenAI GPT-4o, ElevenLabs, and Sarvam AI.\n• Engineered an adaptive multi-turn dialog state machine with acoustic VAD filtering and repeat-request interceptors.\n• Developed an LLM-as-a-Judge answer-validity filter (gpt-4o-mini) with 99.8% fail-open validity resiliency.\n• Engineered distributed Redis session checkpointing with 24-hour handoff buffers for zero-data-loss reconnect recovery.\n• Resolved 20+ multilingual (Hindi/English) speech evaluation edge cases.\n• Deployed containerized stacks on AWS EC2 with Docker Compose and Caddy reverse proxy TLS.`
-  }
+About Dwij:
+Name: ${profile.name}
+Role: ${profile.role}
+Location: ${profile.location}
+Email: ${profile.email}
+Phone: ${profile.phone}
+GitHub: ${profile.github}
+LinkedIn: ${profile.linkedin}
+Summary: ${profile.bioIntro} ${profile.summary}
 
-  if (q.includes('finsight') || q.includes('trading') || q.includes('markowitz') || q.includes('rl') || q.includes('ppo') || q.includes('finance')) {
-    return `FinSight AI is Dwij's quantitative intelligence and autonomous trading platform:\n\n• Combines SARIMAX time-series models, LSTM neural networks, and FinBERT NLP news sentiment analysis.\n• Built an autonomous Markov Decision Process (MDP) trading environment; trained PPO, A2C, and DQN reinforcement learning agents.\n• Implemented Markowitz Modern Portfolio Theory (MPT) via SLSQP numerical optimization and Monte Carlo simulations for Efficient Frontier generation.\n• Modeled downside risk with Historical/Parametric VaR and CVaR (Expected Shortfall).`
-  }
+Education:
+Degree: ${education.degree} (${education.years})
+School: ${education.school}
+GPA: ${education.gpa}
 
-  if (q.includes('compinsight') || q.includes('salary') || q.includes('catboost') || q.includes('compensation') || q.includes('shap')) {
-    return `CompInsight AI is an enterprise ML compensation modeling engine built by Dwij:\n\n• Trained and benchmarked CatBoost, XGBoost, and LightGBM regressors with 5-Fold Bayesian Cross-Validation.\n• Achieved an R² score of 0.93 and a 22% RMSE reduction over baseline models.\n• Engineered a sub-40ms P99 latency FastAPI microservice with Pydantic validation.\n• Integrated SHAP TreeExplainer and Partial Dependence Plots for salary transparency.`
-  }
+Work Experience:
+Company: ${experience[0].org} (${experience[0].date})
+Role: ${experience[0].role}
+Scope: ${experience[0].projectsSubtitle}
+Key Deliverables:
+${experience[0].details.map((d, i) => `${i + 1}. ${d}`).join('\n')}
 
-  if (q.includes('skill') || q.includes('stack') || q.includes('technology') || q.includes('python') || q.includes('fastapi') || q.includes('docker') || q.includes('aws')) {
-    return `Dwij's core engineering stack spans 5 main domains:\n\n• AI / ML: LLMs, Agentic Architectures, Prompt Scaffolding, LLM Evaluation Pipelines, Speech AI (STT/TTS/VAD), Scikit-learn, PyTorch, LangChain.\n• Backend: Python, FastAPI, Django, Asyncio, RESTful APIs, WebSockets, Webhooks, Pydantic.\n• Real-Time & Databases: LiveKit SFU, WebRTC, Redis (Caching & Session Buffer), PostgreSQL, MySQL.\n• Cloud & DevOps: AWS (EC2, S3), Docker Compose, Caddy TLS, Git, GitHub Actions, AWS CodeBuild, Pytest.\n• Languages: Python, C++, C, JavaScript, SQL, Bash.`
-  }
+Key Projects:
+1. InterviewGod.ai: Real-Time Voice AI Agent & LLM Evaluation Platform using LiveKit SFU (WebRTC), OpenAI GPT-4o, ElevenLabs, Sarvam AI, Redis 24h state buffer, gpt-4o-mini LLM-as-a-Judge answer-validity gate (<1s latency, 99.8% pass rate, 20+ multilingual edge cases resolved).
+2. FinSight AI: Quantitative Intelligence & Autonomous Trading Platform using SARIMAX, LSTM, FinBERT NLP, MDP RL trading agents (PPO/A2C/DQN), and Markowitz Modern Portfolio Theory (SLSQP optimization, Monte Carlo, VaR/CVaR).
+3. CompInsight AI: Enterprise ML Compensation Modeling Engine benchmarking CatBoost, XGBoost, and LightGBM (5-Fold Bayesian CV, R² of 0.93, 22% RMSE reduction), FastAPI REST sub-40ms P99 latency, and SHAP TreeExplainer.
 
-  if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('reach') || q.includes('hire') || q.includes('linkedin')) {
-    return `You can reach out to Dwij directly:\n\n• Email: dwijprajapati46476@gmail.com\n• Phone: +91-9979246476\n• LinkedIn: linkedin.com/in/dwij-prajapati\n• GitHub: github.com/Dwij2710\n• Location: Bharuch, Gujarat, India (Available for remote & hybrid roles).`
-  }
+Technical Skills:
+${skillGroups.map((g) => `${g.title}: ${g.items.join(', ')}`).join('\n')}
 
-  if (q.includes('education') || q.includes('degree') || q.includes('college') || q.includes('gpa') || q.includes('certificate')) {
-    return `Dwij is pursuing a B.Tech in Computer Engineering from G.H. Patel College of Engineering and Technology (2022–2026) with a CGPA of 8.18 / 10. Honors include the Machine Learning A-Z Prize and Complete Python Bootcamp Certification.`
-  }
+Metrics:
+${metrics.map((m) => `• ${m.label}: ${m.value} (${m.unit})`).join('\n')}
 
-  return `Dwij Prajapati is an AI, Backend & Full-Stack Engineer specializing in real-time voice AI agents (LiveKit SFU, GPT-4o, ElevenLabs), low-latency asynchronous microservices (FastAPI, Redis), and quantitative machine learning platforms. You can ask me about his work on InterviewGod.ai, FinSight AI, CompInsight AI, or his tech stack!`
-}
+Rules:
+1. Always be helpful, precise, and technical.
+2. If asked about something not present in Dwij's profile, politely state that you only have information about Dwij's verified portfolio and engineering background.
+3. Keep responses clean, well-formatted with bullet points when explaining architecture.`
 
 export default function AskDwijAI() {
   const [isOpen, setIsOpen] = useState(false)
@@ -55,7 +67,7 @@ export default function AskDwijAI() {
     {
       id: 'welcome',
       role: 'assistant',
-      content: 'Hello! I am Dwij\'s AI Assistant. Ask me anything about his production work on real-time Voice AI, backend systems, FinSight AI, or engineering stack.',
+      content: 'Hello! I am Dwij\'s AI Assistant. Ask me anything about his Voice AI systems, distributed backend architecture, machine learning models, or tech stack.',
     },
   ])
   const [isTyping, setIsTyping] = useState(false)
@@ -71,7 +83,67 @@ export default function AskDwijAI() {
     }
   }, [messages, isOpen])
 
-  const handleSend = (textToSend?: string) => {
+  const callGroqAPI = async (history: ChatMessage[]): Promise<string> => {
+    if (!GROQ_API_KEY) {
+      return fallbackAnswer(history[history.length - 1]?.content || '')
+    }
+
+    try {
+      const groqMessages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...history.filter((m) => m.role !== 'system').map((m) => ({
+          role: m.role,
+          content: m.content,
+        })),
+      ]
+
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${GROQ_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: 'llama-3.3-70b-versatile',
+          messages: groqMessages,
+          temperature: 0.3,
+          max_tokens: 600,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error(`Groq API returned ${response.status}`)
+      }
+
+      const data = await response.json()
+      return data.choices?.[0]?.message?.content || 'I could not generate a response. Please try again.'
+    } catch (err) {
+      console.warn('Groq API error, using verified knowledge engine:', err)
+      return fallbackAnswer(history[history.length - 1]?.content || '')
+    }
+  }
+
+  const fallbackAnswer = (query: string): string => {
+    const q = query.toLowerCase()
+    if (q.includes('banao') || q.includes('interviewgod') || q.includes('voice') || q.includes('webrtc') || q.includes('latency')) {
+      return `At Banao Technologies, Dwij architected the real-time voice AI pipeline for InterviewGod.ai using LiveKit SFU (WebRTC), OpenAI GPT-4o, ElevenLabs, and Sarvam AI.\n\n• Sub-second (<1s) conversational latency with acoustic VAD & semantic turn-taking.\n• Built an LLM-as-a-Judge answer validity gate (gpt-4o-mini, 99.8% pass rate).\n• Engineered Redis 24h state buffer checkpointing for zero data loss.\n• Resolved 20+ multilingual (Hindi/English) speech evaluation edge cases.`
+    }
+    if (q.includes('finsight') || q.includes('trading') || q.includes('rl') || q.includes('markowitz')) {
+      return `FinSight AI is Dwij's quantitative intelligence platform:\n\n• Combines SARIMAX, LSTM, and FinBERT sentiment models.\n• Autonomous Markov Decision Process (MDP) RL trading agents (PPO/A2C/DQN).\n• Markowitz Modern Portfolio Theory (SLSQP optimization, Monte Carlo) and VaR/CVaR risk analysis.`
+    }
+    if (q.includes('compinsight') || q.includes('catboost') || q.includes('salary')) {
+      return `CompInsight AI is an enterprise ML compensation engine:\n\n• CatBoost, XGBoost, and LightGBM models with 5-Fold Bayesian CV (R² of 0.93, 22% RMSE reduction).\n• Sub-40ms P99 latency FastAPI REST microservice.\n• Integrated SHAP TreeExplainer for feature importance visualization.`
+    }
+    if (q.includes('skill') || q.includes('stack') || q.includes('technology')) {
+      return `Dwij's core engineering stack spans:\n\n• AI / ML: LLMs, Voice AI (STT/TTS/VAD), Evaluation Gates, Scikit-learn, PyTorch, LangChain.\n• Backend: Python, FastAPI, Django, Asyncio, REST, WebSockets, Pydantic.\n• Databases & Real-Time: LiveKit SFU, WebRTC, Redis, PostgreSQL, MySQL.\n• DevOps: AWS (EC2, S3), Docker Compose, Caddy TLS, CodeBuild CI/CD.`
+    }
+    if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('linkedin')) {
+      return `You can reach Dwij directly:\n\n• Email: ${profile.email}\n• Phone: ${profile.phone}\n• LinkedIn: ${profile.linkedin}\n• GitHub: ${profile.github}`
+    }
+    return `Dwij Prajapati is an AI, Backend & Full-Stack Engineer specializing in real-time voice AI agents, distributed microservices, and quantitative ML models. You can contact him at ${profile.email}.`
+  }
+
+  const handleSend = async (textToSend?: string) => {
     const query = (textToSend || input).trim()
     if (!query) return
 
@@ -81,20 +153,21 @@ export default function AskDwijAI() {
       content: query,
     }
 
-    setMessages((prev) => [...prev, userMsg])
+    const updatedHistory = [...messages, userMsg]
+    setMessages(updatedHistory)
     setInput('')
     setIsTyping(true)
 
-    setTimeout(() => {
-      const answer = getVerifiedAnswer(query)
-      const assistantMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: answer,
-      }
-      setMessages((prev) => [...prev, assistantMsg])
-      setIsTyping(false)
-    }, 450)
+    const answer = await callGroqAPI(updatedHistory)
+
+    const assistantMsg: ChatMessage = {
+      id: (Date.now() + 1).toString(),
+      role: 'assistant',
+      content: answer,
+    }
+
+    setMessages((prev) => [...prev, assistantMsg])
+    setIsTyping(false)
   }
 
   return (
@@ -118,7 +191,7 @@ export default function AskDwijAI() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.25 }}
-            className="fixed bottom-20 right-4 sm:right-6 z-50 w-[92vw] sm:w-[420px] max-h-[580px] rounded-3xl glass-panel border border-white/15 shadow-2xl flex flex-col overflow-hidden bg-[#060911]/95 backdrop-blur-2xl"
+            className="fixed bottom-20 right-4 sm:right-6 z-50 w-[92vw] sm:w-[440px] max-h-[600px] rounded-3xl glass-panel border border-white/15 shadow-2xl flex flex-col overflow-hidden bg-[#060911]/95 backdrop-blur-2xl"
           >
             {/* Header */}
             <div className="p-4 border-b border-white/10 flex items-center justify-between bg-white/[0.03]">
@@ -128,8 +201,10 @@ export default function AskDwijAI() {
                 </div>
                 <div>
                   <h3 className="font-mono text-xs font-bold text-white flex items-center gap-1.5">
-                    <span>Dwij's AI Assistant</span>
-                    <span className="w-2 h-2 rounded-full bg-cyan-glow animate-ping" />
+                    <span>Ask Dwij's AI</span>
+                    <span className="font-mono text-[9px] px-2 py-0.5 rounded-full bg-violet-600/30 text-violet-light border border-violet-500/40">
+                      Groq LLaMA 3.3
+                    </span>
                   </h3>
                   <p className="text-[10px] text-secondary font-mono">
                     Verified Portfolio Knowledge Base
@@ -180,7 +255,7 @@ export default function AskDwijAI() {
               {isTyping && (
                 <div className="flex items-center gap-2 text-muted font-mono text-[11px] pl-8">
                   <span className="w-2 h-2 rounded-full bg-cyan-glow animate-bounce" />
-                  <span>Synthesizing verified knowledge...</span>
+                  <span>Groq LLaMA 3.3 inferencing...</span>
                 </div>
               )}
 
@@ -217,7 +292,7 @@ export default function AskDwijAI() {
               />
               <button
                 type="submit"
-                disabled={!input.trim()}
+                disabled={!input.trim() || isTyping}
                 className="p-2 rounded-full bg-violet-600 hover:bg-violet-500 disabled:opacity-40 text-white transition-all shadow-md"
                 aria-label="Send message"
               >
