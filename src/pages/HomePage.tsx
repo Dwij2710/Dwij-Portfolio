@@ -55,16 +55,16 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="space-y-28 sm:space-y-36">
+    <div className="space-y-24 sm:space-y-32">
       {/* 1. Cinematic Hero Section */}
-      <section className="relative min-h-[92vh] flex flex-col justify-center pt-24 sm:pt-28 overflow-hidden">
+      <section className="relative min-h-[86vh] flex flex-col justify-center pt-20 sm:pt-24 pb-8 overflow-hidden">
         <div className="ambient-glow-violet -top-40 -left-40 opacity-40" />
         <div className="ambient-glow-cyan top-1/2 -right-40 opacity-30" />
 
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
             {/* Left: Editorial Hero Content */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-5">
               {/* Status Pill */}
               <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel border border-violet-glow/30 shadow-lg">
                 <span className="w-2 h-2 rounded-full bg-cyan-glow shadow-[0_0_8px_#06B6D4] animate-pulse" />
@@ -79,32 +79,32 @@ export default function HomePage() {
               </div>
 
               {/* Giant Editorial Heading */}
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <p className="font-mono text-xs sm:text-sm font-semibold tracking-[0.25em] text-violet-light uppercase">
                   AI • BACKEND • FULL-STACK ENGINEER
                 </p>
-                <h1 className="text-5xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.02]">
+                <h1 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.02]">
                   DWIJ <br />
                   <span className="text-shimmer">PRAJAPATI</span>
                 </h1>
               </div>
 
               {/* Rotating Specialization */}
-              <div className="font-mono text-lg sm:text-xl font-bold text-cyan-light flex items-center gap-2.5">
+              <div className="font-mono text-base sm:text-lg font-bold text-cyan-light flex items-center gap-2.5">
                 <span className="text-violet-glow">{'>'}</span>
                 <span>{profile.roles[roleIndex]}</span>
               </div>
 
               {/* Narrative Subheading */}
-              <p className="text-lg sm:text-xl text-secondary leading-relaxed max-w-xl font-normal">
+              <p className="text-base sm:text-lg text-secondary leading-relaxed max-w-xl font-normal">
                 I build intelligent systems, real-time voice AI experiences, and production-grade backend infrastructure.
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <Link
                   to="/projects"
-                  className="group px-7 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-mono text-xs font-bold uppercase tracking-wider hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2 shadow-lg"
+                  className="group px-6 sm:px-7 py-3 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-mono text-xs font-bold uppercase tracking-wider hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2 shadow-lg"
                 >
                   <span>Explore My Work</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -112,7 +112,7 @@ export default function HomePage() {
 
                 <Link
                   to="/resume"
-                  className="px-6 py-3.5 rounded-full glass-card border border-white/15 hover:border-violet-glow text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-white/[0.08] transition-all flex items-center gap-2"
+                  className="px-5 sm:px-6 py-3 rounded-full glass-card border border-white/15 hover:border-violet-glow text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-white/[0.08] transition-all flex items-center gap-2"
                 >
                   <FileText className="w-4 h-4 text-cyan-glow" />
                   <span>View Resume</span>
@@ -120,14 +120,14 @@ export default function HomePage() {
 
                 <Link
                   to="/contact"
-                  className="px-5 py-3.5 rounded-full text-secondary hover:text-white font-mono text-xs font-semibold uppercase tracking-wider transition-colors"
+                  className="px-4 py-3 rounded-full text-secondary hover:text-white font-mono text-xs font-semibold uppercase tracking-wider transition-colors"
                 >
                   Let's Talk →
                 </Link>
               </div>
 
               {/* Quick KPI Strip */}
-              <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-6 sm:gap-10 font-mono text-xs">
+              <div className="pt-5 border-t border-white/10 flex flex-wrap items-center gap-6 sm:gap-10 font-mono text-xs">
                 <div>
                   <p className="text-muted text-[10px] uppercase font-bold tracking-wider">VOICE AI LATENCY</p>
                   <p className="text-lg font-bold text-white mt-0.5">&lt;1s</p>
@@ -154,8 +154,8 @@ export default function HomePage() {
       </section>
 
       {/* 2. What I Build Capabilities Grid */}
-      <section className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-12">
-        <div className="space-y-3">
+      <section className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-10">
+        <div className="space-y-2">
           <span className="font-mono text-xs font-bold text-violet-light tracking-[0.25em] uppercase">
             01 // CAPABILITIES & SCOPE
           </span>
@@ -196,7 +196,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. Featured Selected Work Showcase */}
-      <section className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-12">
+      <section className="max-w-7xl mx-auto w-full px-4 sm:px-6 space-y-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-6">
           <div className="space-y-2">
             <span className="font-mono text-xs font-bold text-cyan-light tracking-[0.25em] uppercase">
@@ -216,9 +216,9 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-10">
           {/* Project 1: InterviewGod.ai */}
-          <article className="glass-panel p-8 sm:p-12 rounded-3xl space-y-8 hover:border-violet-glow/40 transition-all">
+          <article className="glass-panel p-8 sm:p-10 lg:p-12 rounded-3xl space-y-7 hover:border-violet-glow/40 transition-all">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-white/10 pb-6">
               <div className="space-y-2">
                 <span className="font-mono text-xs font-bold text-violet-light px-3 py-1 rounded-full bg-violet-600/20 border border-violet-500/30">
@@ -269,7 +269,7 @@ export default function HomePage() {
           </article>
 
           {/* Project 2: FinSight AI */}
-          <article className="glass-panel p-8 sm:p-12 rounded-3xl space-y-8 hover:border-violet-glow/40 transition-all">
+          <article className="glass-panel p-8 sm:p-10 lg:p-12 rounded-3xl space-y-7 hover:border-violet-glow/40 transition-all">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-white/10 pb-6">
               <div className="space-y-2">
                 <span className="font-mono text-xs font-bold text-cyan-light px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30">
@@ -307,7 +307,7 @@ export default function HomePage() {
 
       {/* 4. Quantified Engineering Metrics Strip */}
       <section className="max-w-7xl mx-auto w-full px-4 sm:px-6">
-        <div className="glass-panel p-8 sm:p-12 rounded-3xl space-y-8">
+        <div className="glass-panel p-8 sm:p-10 lg:p-12 rounded-3xl space-y-8">
           <div className="space-y-2 border-b border-white/10 pb-6">
             <span className="font-mono text-xs font-bold text-violet-light tracking-[0.25em] uppercase">
               03 // QUANTIFIED BENCHMARKS

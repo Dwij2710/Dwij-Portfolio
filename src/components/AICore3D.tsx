@@ -11,12 +11,12 @@ interface TechOrbital {
 }
 
 const orbitals: TechOrbital[] = [
-  { name: 'GPT-4o', color: '#8B5CF6', radius: 2.7, speed: 0.3, initialAngle: 0.2, y: 0.5 },
-  { name: 'LiveKit SFU', color: '#06B6D4', radius: 3.1, speed: -0.25, initialAngle: 1.5, y: -0.7 },
-  { name: 'FastAPI', color: '#10B981', radius: 2.5, speed: 0.35, initialAngle: 2.8, y: 1.1 },
-  { name: 'Redis State', color: '#EF4444', radius: 3.4, speed: -0.2, initialAngle: 3.9, y: 0.1 },
-  { name: 'Docker / AWS', color: '#3B82F6', radius: 2.8, speed: 0.25, initialAngle: 4.8, y: -1.0 },
-  { name: 'ElevenLabs', color: '#F59E0B', radius: 3.3, speed: -0.3, initialAngle: 5.8, y: 0.8 },
+  { name: 'GPT-4o', color: '#8B5CF6', radius: 2.6, speed: 0.3, initialAngle: 0.1, y: 0.4 },
+  { name: 'LiveKit SFU', color: '#06B6D4', radius: 2.9, speed: -0.25, initialAngle: 1.4, y: -0.6 },
+  { name: 'FastAPI', color: '#10B981', radius: 2.4, speed: 0.35, initialAngle: 2.7, y: 1.0 },
+  { name: 'Redis State', color: '#EF4444', radius: 3.1, speed: -0.2, initialAngle: 3.8, y: 0.1 },
+  { name: 'Docker / AWS', color: '#3B82F6', radius: 2.7, speed: 0.25, initialAngle: 4.7, y: -0.9 },
+  { name: 'ElevenLabs', color: '#F59E0B', radius: 3.0, speed: -0.3, initialAngle: 5.7, y: 0.7 },
 ]
 
 export default function AICore3D() {
@@ -32,8 +32,8 @@ export default function AICore3D() {
     let width = container.clientWidth
     let height = container.clientHeight
 
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
-    camera.position.z = 7.5
+    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100)
+    camera.position.z = 7.8
 
     const renderer = new THREE.WebGLRenderer({
       canvas,
@@ -45,7 +45,7 @@ export default function AICore3D() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
     // 1. Central Neural Wireframe Core
-    const coreGeo = new THREE.IcosahedronGeometry(1.6, 2)
+    const coreGeo = new THREE.IcosahedronGeometry(1.5, 2)
     const coreMat = new THREE.MeshStandardMaterial({
       color: 0x8b5cf6,
       wireframe: true,
@@ -60,7 +60,7 @@ export default function AICore3D() {
     scene.add(coreMesh)
 
     // Inner Luminous Core
-    const innerGeo = new THREE.SphereGeometry(1.0, 32, 32)
+    const innerGeo = new THREE.SphereGeometry(0.95, 32, 32)
     const innerMat = new THREE.MeshBasicMaterial({
       color: 0x06b6d4,
       transparent: true,
@@ -80,7 +80,7 @@ export default function AICore3D() {
     const colorWhite = new THREE.Color(0xffffff)
 
     for (let i = 0; i < particleCount; i++) {
-      const radius = 1.8 + Math.random() * 1.6
+      const radius = 1.7 + Math.random() * 1.5
       const theta = Math.random() * Math.PI * 2
       const phi = Math.acos(Math.random() * 2 - 1)
 
@@ -108,7 +108,7 @@ export default function AICore3D() {
     scene.add(particleSystem)
 
     // 3. Orbiting Data Energy Rings
-    const ringGeo = new THREE.TorusGeometry(2.3, 0.015, 16, 100)
+    const ringGeo = new THREE.TorusGeometry(2.2, 0.014, 16, 100)
     const ringMat = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.4 })
     const ring1 = new THREE.Mesh(ringGeo, ringMat)
     ring1.rotation.x = Math.PI / 3
@@ -116,7 +116,7 @@ export default function AICore3D() {
     scene.add(ring1)
 
     const ring2 = new THREE.Mesh(
-      new THREE.TorusGeometry(2.6, 0.012, 16, 100),
+      new THREE.TorusGeometry(2.5, 0.012, 16, 100),
       new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.35 })
     )
     ring2.rotation.x = -Math.PI / 4
@@ -168,11 +168,11 @@ export default function AICore3D() {
       const delta = clock.getDelta()
       const time = clock.getElapsedTime()
 
-      coreMesh.rotation.y += delta * 0.25
-      coreMesh.rotation.x += delta * 0.15
-      particleSystem.rotation.y -= delta * 0.12
-      ring1.rotation.z += delta * 0.2
-      ring2.rotation.z -= delta * 0.25
+      coreMesh.rotation.y += delta * 0.22
+      coreMesh.rotation.x += delta * 0.12
+      particleSystem.rotation.y -= delta * 0.1
+      ring1.rotation.z += delta * 0.18
+      ring2.rotation.z -= delta * 0.22
 
       scene.rotation.y += (targetRotationY - scene.rotation.y) * 0.05
       scene.rotation.x += (targetRotationX - scene.rotation.x) * 0.05
@@ -200,9 +200,9 @@ export default function AICore3D() {
   }, [])
 
   return (
-    <div ref={containerRef} className="relative w-full h-[400px] sm:h-[480px] lg:h-[540px] flex items-center justify-center select-none">
-      <div className="absolute w-72 h-72 rounded-full bg-violet-600/15 blur-[100px] pointer-events-none" />
-      <div className="absolute w-60 h-60 rounded-full bg-cyan-500/10 blur-[90px] pointer-events-none" />
+    <div ref={containerRef} className="relative w-full h-[380px] sm:h-[460px] lg:h-[500px] flex items-center justify-center select-none overflow-visible">
+      <div className="absolute w-64 h-64 rounded-full bg-violet-600/15 blur-[90px] pointer-events-none" />
+      <div className="absolute w-56 h-56 rounded-full bg-cyan-500/10 blur-[80px] pointer-events-none" />
 
       <canvas ref={canvasRef} className="w-full h-full cursor-grab active:cursor-grabbing relative z-10" />
 
@@ -211,12 +211,12 @@ export default function AICore3D() {
         {orbitals.map((tech, idx) => (
           <div
             key={tech.name}
-            className={`hidden sm:flex absolute font-mono text-[11px] font-bold px-3 py-1 rounded-full glass-panel border shadow-xl items-center gap-1.5 pointer-events-auto ${
+            className={`hidden sm:flex absolute font-mono text-[11px] font-bold px-3 py-1 rounded-full glass-panel border border-white/15 shadow-xl items-center gap-1.5 pointer-events-auto transition-all ${
               idx % 2 === 0 ? 'animate-float-slow' : 'animate-float-reverse'
             }`}
             style={{
-              transform: `translate(${Math.cos(tech.initialAngle) * 150}px, ${Math.sin(tech.initialAngle) * 120 + tech.y * 25}px)`,
-              borderColor: `${tech.color}40`,
+              transform: `translate(${Math.cos(tech.initialAngle) * 140}px, ${Math.sin(tech.initialAngle) * 110 + tech.y * 20}px)`,
+              borderColor: `${tech.color}50`,
             }}
           >
             <span className="w-2 h-2 rounded-full shadow-[0_0_8px]" style={{ backgroundColor: tech.color }} />
