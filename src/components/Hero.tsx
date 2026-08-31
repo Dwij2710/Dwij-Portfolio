@@ -79,7 +79,6 @@ export default function Hero() {
         >
           <span className="text-faint">{'> '}</span>
           <span>{profile.roles[roleIndex]}</span>
-          <span className="animate-pulse font-bold">_</span>
         </motion.div>
 
         {/* Bio Narrative */}

@@ -93,7 +93,7 @@ export default function Nav() {
       {/* Mobile Top Header */}
       <nav className="md:hidden fixed top-0 left-0 right-0 z-40 bg-base/90 backdrop-blur-md border-b border-hairline px-4 py-3 flex items-center justify-between gap-3">
         <a href="#hero" className="font-mono text-xs font-semibold text-ink">
-          DP<span className="text-signal">_</span>
+          DP
         </a>
 
         <ul className="flex overflow-x-auto gap-4 font-mono text-[11px] text-muted py-0.5 no-scrollbar">
