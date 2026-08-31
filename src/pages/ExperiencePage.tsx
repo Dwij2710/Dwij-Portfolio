@@ -65,11 +65,11 @@ export default function ExperiencePage() {
     <div className="py-8 md:py-12 max-w-container mx-auto">
       {/* Header */}
       <div className="mb-10 border-b border-hairline pb-6">
-        <p className="font-mono text-xs text-faint mb-2">// 02. production experience & telemetry</p>
+        <p className="font-mono text-xs text-signal mb-2 font-semibold">// 02. production experience & telemetry</p>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-ink">
           Systems & Voice AI Infrastructure
         </h1>
-        <p className="font-mono text-sm text-data mt-2">
+        <p className="font-mono text-sm text-data mt-2 font-medium">
           Production Architecture behind InterviewGod.ai • Real-Time Multimodal Evaluation
         </p>
       </div>
@@ -77,56 +77,56 @@ export default function ExperiencePage() {
       {/* Live Telemetry Metrics Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {metrics.map((m) => (
-          <div key={m.label} className="p-4 bg-panel border border-hairline rounded-sm shadow-sm hover:border-signal/40 transition-colors">
-            <p className="font-mono text-[10px] text-faint uppercase">{m.label}</p>
-            <p className="mt-1 text-2xl font-medium font-mono text-ink">{m.value}</p>
-            <p className="font-mono text-[11px] text-data mt-0.5">{m.unit}</p>
+          <div key={m.label} className="p-4 bg-panel border border-hairline rounded-sm shadow-sm hover:border-signal/50 transition-colors">
+            <p className="font-mono text-[10px] text-faint uppercase font-semibold">{m.label}</p>
+            <p className="mt-1 text-2xl font-bold font-mono text-ink">{m.value}</p>
+            <p className="font-mono text-xs text-data mt-0.5 font-medium">{m.unit}</p>
           </div>
         ))}
       </div>
 
       {/* Role Overview Executive Card */}
-      <section className="bg-panel border border-hairline p-6 sm:p-8 rounded-sm shadow-sm mb-12 space-y-4">
+      <section className="bg-panel border border-hairline p-6 sm:p-8 rounded-sm shadow-xl mb-12 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-signal status-dot" />
-              <span className="font-mono text-xs text-data font-semibold">{job.date}</span>
+              <span className="font-mono text-xs text-data font-bold">{job.date}</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl text-ink font-medium mt-1">
+            <h2 className="text-2xl sm:text-3xl text-ink font-semibold mt-1">
               {job.role}
             </h2>
-            <p className="font-mono text-base text-signal font-medium">
+            <p className="font-mono text-base text-signal font-semibold">
               {job.org}
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2 font-mono text-xs">
-            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-muted">
+            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-ink font-medium">
               LiveKit SFU
             </span>
-            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-muted">
+            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-ink font-medium">
               FastAPI
             </span>
-            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-muted">
+            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-ink font-medium">
               Redis State
             </span>
-            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-muted">
+            <span className="px-3 py-1 bg-panel2 border border-hairline rounded-sm text-ink font-medium">
               AWS EC2
             </span>
           </div>
         </div>
 
         {/* Project Scope Banner */}
-        <div className="p-3.5 bg-panel2 border border-hairline rounded-sm flex items-start gap-2.5">
+        <div className="p-4 bg-panel2 border border-hairline rounded-sm flex items-start gap-2.5">
           <Terminal className="w-4 h-4 text-signal shrink-0 mt-0.5" />
-          <p className="font-mono text-xs text-muted leading-relaxed">
-            <span className="text-signal font-semibold">Core Scope: </span>
+          <p className="font-mono text-xs text-ink leading-relaxed">
+            <span className="text-signal font-bold">Core Scope: </span>
             {job.projectsSubtitle}
           </p>
         </div>
 
-        <p className="text-muted text-base leading-relaxed max-w-4xl">
+        <p className="text-ink text-base leading-relaxed max-w-4xl font-normal">
           {job.summary}
         </p>
       </section>
@@ -135,12 +135,12 @@ export default function ExperiencePage() {
       <section className="mb-14 space-y-6">
         <div className="flex items-center justify-between border-b border-hairline pb-4">
           <div>
-            <p className="font-mono text-xs text-faint mb-1">// architecture deep-dive</p>
-            <h3 className="text-2xl sm:text-3xl font-medium text-ink">
+            <p className="font-mono text-xs text-signal mb-1 font-semibold">// architecture deep-dive</p>
+            <h3 className="text-2xl sm:text-3xl font-semibold text-ink">
               Core Engineering Deliverables & Pillars
             </h3>
           </div>
-          <span className="font-mono text-xs text-muted">4 Dedicated Architectural Areas</span>
+          <span className="font-mono text-xs text-data font-bold">4 Dedicated Architectural Areas</span>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -151,30 +151,30 @@ export default function ExperiencePage() {
             return (
               <div
                 key={pillar.id}
-                className="bg-panel border border-hairline p-6 sm:p-7 rounded-sm hover:border-signal/50 transition-all shadow-sm flex flex-col justify-between space-y-5"
+                className="bg-panel border border-hairline p-6 sm:p-7 rounded-sm hover:border-signal/50 transition-all shadow-md flex flex-col justify-between space-y-5"
               >
                 <div className="space-y-4">
                   {/* Card Header */}
                   <div className="flex items-start justify-between gap-3 border-b border-hairline pb-3">
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 bg-panel2 border border-hairline rounded-sm ${isSignal ? 'text-signal' : 'text-data'}`}>
+                      <div className={`p-2.5 bg-panel2 border border-hairline rounded-sm ${isSignal ? 'text-signal' : 'text-data'}`}>
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="font-mono text-[10px] text-faint">PILLAR 0{idx + 1}</span>
-                        <h4 className="text-lg font-medium text-ink leading-snug">
+                        <span className="font-mono text-[10px] text-faint font-bold">PILLAR 0{idx + 1}</span>
+                        <h4 className="text-lg font-semibold text-ink leading-snug">
                           {pillar.title}
                         </h4>
                       </div>
                     </div>
-                    <span className={`font-mono text-[10px] font-semibold px-2 py-0.5 rounded shrink-0 ${
-                      isSignal ? 'text-signal bg-signal/10' : 'text-data bg-data/10'
+                    <span className={`font-mono text-[10px] font-bold px-2.5 py-1 rounded shrink-0 border ${
+                      isSignal ? 'text-signal bg-signal/15 border-signal/30' : 'text-data bg-data/15 border-data/30'
                     }`}>
                       {pillar.tag}
                     </span>
                   </div>
 
-                  <p className="font-mono text-xs text-data">
+                  <p className="font-mono text-xs text-data font-semibold">
                     {pillar.subtitle}
                   </p>
 
@@ -183,7 +183,7 @@ export default function ExperiencePage() {
                     {pillar.points.map((point, pIdx) => (
                       <div key={pIdx} className="flex items-start gap-2.5 text-sm text-ink leading-relaxed">
                         <CheckCircle2 className={`w-4 h-4 shrink-0 mt-1 ${isSignal ? 'text-signal' : 'text-data'}`} />
-                        <p className="text-muted leading-relaxed font-sans">
+                        <p className="text-ink text-sm sm:text-[15px] leading-relaxed font-normal">
                           {point}
                         </p>
                       </div>
@@ -193,12 +193,12 @@ export default function ExperiencePage() {
 
                 {/* Tech Chips */}
                 <div className="pt-4 border-t border-hairline space-y-2">
-                  <p className="font-mono text-[10px] text-faint uppercase">Technologies Involved</p>
+                  <p className="font-mono text-[11px] text-faint font-bold uppercase">Technologies Involved</p>
                   <div className="flex flex-wrap gap-1.5">
                     {pillar.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="font-mono text-[11px] text-muted bg-panel2 border border-hairline rounded-sm px-2 py-0.5 hover:text-ink transition-colors"
+                        className="font-mono text-xs text-ink font-medium bg-panel2 border border-hairline rounded-sm px-2.5 py-1 hover:text-signal hover:border-signal/40 transition-colors"
                       >
                         {tech}
                       </span>
@@ -215,13 +215,13 @@ export default function ExperiencePage() {
       <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-hairline pt-6">
         <Link
           to="/about"
-          className="px-5 py-2.5 border border-hairline text-muted hover:text-ink font-mono text-xs rounded-sm hover:border-faint transition-colors"
+          className="px-5 py-2.5 border border-hairline text-ink hover:text-signal font-mono text-xs rounded-sm hover:border-signal transition-colors font-semibold"
         >
           <span>← About & Stack</span>
         </Link>
         <Link
           to="/projects"
-          className="px-5 py-2.5 bg-signal text-base font-mono text-xs font-semibold rounded-sm hover:bg-signal/90 transition-all flex items-center gap-2"
+          className="px-5 py-2.5 bg-signal text-base font-mono text-xs font-bold rounded-sm hover:bg-signal/90 transition-all flex items-center gap-2"
         >
           <span>Next: Engineering Projects</span>
           <ArrowRight className="w-4 h-4" />
