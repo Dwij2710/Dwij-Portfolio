@@ -5,41 +5,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#04060A',
-        surface: '#090D16',
-        'surface-elevated': '#0F1523',
-        'surface-glass': 'rgba(15, 21, 35, 0.65)',
+        background: '#08090C',
+        surface: '#0D111A',
+        'surface-elevated': '#121724',
+        'surface-glass': 'rgba(13, 17, 26, 0.65)',
         border: 'rgba(255, 255, 255, 0.08)',
         'border-light': 'rgba(255, 255, 255, 0.15)',
-        'border-accent': 'rgba(139, 92, 246, 0.3)',
+        'border-accent': 'rgba(0, 229, 199, 0.4)',
         primary: '#F8FAFC',
         secondary: '#94A3B8',
         muted: '#64748B',
-        violet: {
-          glow: '#8B5CF6',
-          light: '#A78BFA',
+        accent: {
+          DEFAULT: '#00E5C7',
+          hover: '#26EBD0',
+          light: '#6EFAE8',
+          dim: 'rgba(0, 229, 199, 0.15)',
+          glow: 'rgba(0, 229, 199, 0.35)',
         },
         cyan: {
-          glow: '#06B6D4',
-          light: '#67E8F9',
-        },
-        indigo: {
-          glow: '#6366F1',
-          light: '#818CF8',
-        },
-        amber: {
-          glow: '#F59E0B',
-          light: '#FCD34D',
+          glow: '#00E5C7',
+          light: '#5EEAD4',
         },
       },
       fontFamily: {
+        display: ['"Space Grotesk"', 'sans-serif'],
         sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-glow': 'radial-gradient(circle at 50% 30%, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.08), transparent 70%)',
+        'hero-accent-glow': 'radial-gradient(circle at 50% 30%, rgba(0, 229, 199, 0.12), transparent 70%)',
       },
       animation: {
         'float-slow': 'float 8s ease-in-out infinite',

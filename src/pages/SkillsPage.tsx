@@ -1,84 +1,113 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Cpu, Server, Code, Layers, Cloud, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { Cpu, Server, Code, Layers, Cloud, ArrowRight, CheckCircle2, ShieldCheck, Terminal } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import { skillGroups } from '../lib/data'
 
-const domainMeta = [
-  { title: 'AI / Machine Learning', icon: Cpu, color: '#8B5CF6' },
-  { title: 'Backend & System Design', icon: Server, color: '#6366F1' },
-  { title: 'Programming Languages', icon: Code, color: '#06B6D4' },
-  { title: 'Databases & State', icon: Layers, color: '#EF4444' },
-  { title: 'Cloud, DevOps & Tools', icon: Cloud, color: '#3B82F6' },
-]
+const domainIcons: Record<string, typeof Cpu> = {
+  'AI / Machine Learning': Cpu,
+  'Backend & System Design': Server,
+  'Programming Languages': Code,
+  'Databases & State': Layers,
+  'Cloud, DevOps & Tools': Cloud,
+}
 
 export default function SkillsPage() {
-  const [activeGroup, setActiveGroup] = useState<string | null>(null)
+  const [selectedTier, setSelectedTier] = useState<'ALL' | 'Core' | 'Advanced'>('ALL')
 
   return (
-    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-12">
+    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-16 pt-6">
       <PageHeader
         tag="04 // TECHNICAL ECOSYSTEM"
         title="DWIJ'S PRODUCTION"
         highlight="ENGINEERING STACK."
-        description="A structured overview of the Generative AI orchestration tools, high-concurrency backend frameworks, distributed databases, and cloud infrastructure I operate in production."
+        description="A structured overview of Generative AI orchestration tools, high-concurrency backend frameworks, distributed state managers, and cloud infrastructure I operate in production."
       />
+
+      {/* Filter and Legend Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+        <div className="flex items-center gap-2 font-mono text-xs">
+          <span className="text-muted">PROFICIENCY FILTER:</span>
+          {(['ALL', 'Core', 'Advanced'] as const).map((tier) => (
+            <button
+              key={tier}
+              onClick={() => setSelectedTier(tier)}
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${
+                selectedTier === tier
+                  ? 'bg-accent text-slate-950 shadow-sm'
+                  : 'bg-white/[0.04] text-secondary hover:text-white border border-white/10'
+              }`}
+            >
+              {tier === 'ALL' ? 'All Skills' : `${tier} Technologies`}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-4 font-mono text-[11px] text-secondary">
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            <span className="text-white">Core (Daily Production)</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-slate-500" />
+            <span>Advanced / Supporting</span>
+          </span>
+        </div>
+      </div>
 
       {/* Grid of Domain Cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {skillGroups.map((group) => {
-          const meta = domainMeta.find((d) => d.title === group.title) || domainMeta[0]
-          const Icon = meta.icon
-          const isHovered = activeGroup === group.title
+          const Icon = domainIcons[group.title] || Code
+          const filteredItems =
+            selectedTier === 'ALL'
+              ? group.items
+              : group.items.filter((item) => item.tier === selectedTier)
 
           return (
             <div
               key={group.title}
-              onMouseEnter={() => setActiveGroup(group.title)}
-              onMouseLeave={() => setActiveGroup(null)}
-              className={`glass-panel p-8 rounded-3xl space-y-6 flex flex-col justify-between transition-all duration-300 ${
-                isHovered ? 'border-violet-glow/50 shadow-[0_0_30px_rgba(139,92,246,0.2)]' : 'hover:border-white/20'
-              }`}
+              className="glass-panel p-7 rounded-3xl space-y-5 border border-white/10 hover:border-accent/40 transition-all duration-300 flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-md"
-                    style={{ backgroundColor: `${meta.color}20`, color: meta.color }}
-                  >
-                    <Icon className="w-6 h-6" />
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-accent/15 text-accent shadow-sm">
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <span
-                    className="font-mono text-[10px] font-bold px-3 py-1 rounded-full border"
-                    style={{
-                      backgroundColor: `${meta.color}15`,
-                      borderColor: `${meta.color}35`,
-                      color: meta.color,
-                    }}
-                  >
+                  <span className="font-mono text-[10px] font-bold px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-muted">
                     {group.items.length} TECHNOLOGIES
                   </span>
                 </div>
 
-                <h3 className="text-xl font-extrabold text-white tracking-tight">
+                <h3 className="font-display text-lg font-bold text-white tracking-tight">
                   {group.title}
                 </h3>
 
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {group.items.map((tech) => (
-                    <span
-                      key={tech}
-                      className="font-mono text-xs font-medium text-white px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 hover:border-violet-500/50 hover:bg-violet-600/10 transition-all"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                {/* Badges in JetBrains Mono with Subtle Proficiency Indicators */}
+                <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                  {filteredItems.map((item) => {
+                    const isCore = item.tier === 'Core'
+                    return (
+                      <span
+                        key={item.name}
+                        className={`px-3 py-1.5 rounded-full border transition-all flex items-center gap-1.5 ${
+                          isCore
+                            ? 'bg-accent/10 border-accent/40 text-white font-medium shadow-sm hover:border-accent'
+                            : 'bg-white/[0.03] border-white/10 text-slate-300 hover:border-white/20'
+                        }`}
+                      >
+                        {isCore && <span className="w-1.5 h-1.5 rounded-full bg-accent" />}
+                        <span>{item.name}</span>
+                      </span>
+                    )
+                  })}
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/10 font-mono text-xs text-muted flex items-center justify-between">
-                <span>● Production Verified</span>
-                <span className="font-semibold text-white">Active Stack</span>
+              {/* Clean category count note - removed repetitive footer text */}
+              <div className="pt-3 border-t border-white/5 font-mono text-[10px] text-muted flex items-center justify-between">
+                <span>Domain Focus</span>
+                <span className="text-slate-400 font-semibold">{group.items.filter(i => i.tier === 'Core').length} Core Services</span>
               </div>
             </div>
           )
@@ -92,7 +121,7 @@ export default function SkillsPage() {
         </Link>
         <Link
           to="/resume"
-          className="font-mono text-xs font-bold text-cyan-light hover:text-white transition-colors flex items-center gap-1.5"
+          className="font-mono text-xs font-bold text-accent hover:underline transition-colors flex items-center gap-1.5"
         >
           <span>View Verified Resume</span>
           <ArrowRight className="w-4 h-4" />

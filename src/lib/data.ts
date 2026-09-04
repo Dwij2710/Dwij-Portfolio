@@ -23,58 +23,77 @@ export const metrics = [
   { label: 'conversational latency', value: '<1s', unit: 'WebRTC / SFU live pipeline' },
   { label: 'compensation model fit', value: '0.93', unit: 'R² score (22% RMSE reduction)' },
   { label: 'edge cases resolved', value: '20+', unit: 'in multilingual eval pipeline' },
-  { label: 'session recovery buffer', value: '24h', unit: 'zero-data-loss redis buffer' },
+  { label: 'redis session buffer', value: '24h', unit: 'Redis Session Checkpointing' },
 ]
 
-export const skillGroups = [
+export interface SkillItem {
+  name: string
+  tier: 'Core' | 'Advanced' | 'Supporting'
+}
+
+export interface SkillCategory {
+  title: string
+  items: SkillItem[]
+}
+
+export const skillGroups: SkillCategory[] = [
   {
     title: 'Programming Languages',
-    items: ['Python', 'C++', 'C', 'JavaScript', 'SQL', 'Bash / Shell'],
+    items: [
+      { name: 'Python', tier: 'Core' },
+      { name: 'C++', tier: 'Advanced' },
+      { name: 'C', tier: 'Supporting' },
+      { name: 'JavaScript', tier: 'Advanced' },
+      { name: 'SQL', tier: 'Core' },
+      { name: 'Bash / Shell', tier: 'Supporting' },
+    ],
   },
   {
     title: 'AI / Machine Learning',
     items: [
-      'LLMs',
-      'Agentic Architectures',
-      'Prompt Engineering & Scaffolding',
-      'LLM Evaluation & Scoring Pipelines',
-      'Multi-Turn Conversation Systems',
-      'Speech AI (STT/TTS & VAD)',
-      'Scikit-learn',
-      'TensorFlow',
-      'NLP',
+      { name: 'LLMs & Agentic Architectures', tier: 'Core' },
+      { name: 'Prompt Scaffolding & Chains', tier: 'Core' },
+      { name: 'LLM-as-a-Judge Evaluation', tier: 'Core' },
+      { name: 'Speech AI (STT/TTS & VAD)', tier: 'Core' },
+      { name: 'Multi-Turn Dialog Systems', tier: 'Core' },
+      { name: 'Scikit-learn', tier: 'Advanced' },
+      { name: 'PyTorch / TensorFlow', tier: 'Advanced' },
+      { name: 'NLP & Transformers', tier: 'Advanced' },
     ],
   },
   {
     title: 'Backend & System Design',
     items: [
-      'FastAPI',
-      'Django',
-      'Asyncio',
-      'RESTful API Design',
-      'WebSockets',
-      'Webhook Architecture',
-      'Distributed Session Management',
-      'Pydantic',
-      'Event-Driven Architecture',
-      'HTTPX',
+      { name: 'FastAPI', tier: 'Core' },
+      { name: 'Asyncio', tier: 'Core' },
+      { name: 'Django', tier: 'Advanced' },
+      { name: 'RESTful API Architecture', tier: 'Core' },
+      { name: 'WebSockets & Real-Time', tier: 'Core' },
+      { name: 'Webhook Architecture', tier: 'Advanced' },
+      { name: 'Redis Session Checkpointing', tier: 'Core' },
+      { name: 'Pydantic V2', tier: 'Core' },
+      { name: 'Event-Driven Systems', tier: 'Advanced' },
+      { name: 'HTTPX Async', tier: 'Advanced' },
     ],
   },
   {
     title: 'Databases & State',
-    items: ['Redis (In-Memory Caching & Session Checkpointing)', 'MySQL', 'PostgreSQL'],
+    items: [
+      { name: 'Redis Session Checkpointing', tier: 'Core' },
+      { name: 'PostgreSQL', tier: 'Core' },
+      { name: 'MySQL', tier: 'Advanced' },
+    ],
   },
   {
     title: 'Cloud, DevOps & Tools',
     items: [
-      'Docker',
-      'Docker Compose',
-      'AWS (EC2, S3)',
-      'Caddy (Reverse Proxy/TLS)',
-      'Git',
-      'GitHub',
-      'Pytest (E2E & Unit Testing)',
-      'Postman',
+      { name: 'Docker Compose', tier: 'Core' },
+      { name: 'AWS EC2 & S3', tier: 'Core' },
+      { name: 'Caddy TLS Proxy', tier: 'Advanced' },
+      { name: 'Git & GitHub', tier: 'Core' },
+      { name: 'AWS CodeBuild CI/CD', tier: 'Advanced' },
+      { name: 'Pytest (E2E & Unit)', tier: 'Advanced' },
+      { name: 'Postman API', tier: 'Supporting' },
     ],
   },
 ]

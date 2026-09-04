@@ -42,7 +42,7 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#04060A] text-primary relative selection:bg-violet-600/40 selection:text-white flex flex-col overflow-x-hidden font-sans">
+      <div className="min-h-screen bg-[#08090C] text-primary relative selection:bg-accent/30 selection:text-white flex flex-col overflow-x-hidden font-sans">
         <ScrollToTop />
         <Navigation />
 
