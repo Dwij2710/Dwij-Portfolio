@@ -5,9 +5,11 @@ import { Mic, Radio, Cpu, ShieldCheck, Database, Volume2, ArrowRight, Zap, Check
 interface PipelineStep {
   id: string
   title: string
+  shortTitle: string
   subtitle: string
   protocol: string
   latency: string
+  badgeLatency: string
   desc: string
   icon: typeof Mic
   activeColor: string
@@ -17,9 +19,11 @@ const pipelineSteps: PipelineStep[] = [
   {
     id: 'user',
     title: 'User Voice Input',
+    shortTitle: 'Voice Input',
     subtitle: 'Opus Audio Stream',
     protocol: 'WebRTC / 48kHz',
     latency: '<20ms',
+    badgeLatency: '<20ms',
     desc: 'Bilingual acoustic stream capture with local client-side VAD (Voice Activity Detection) energy gating.',
     icon: Mic,
     activeColor: '#00E5C7',
@@ -27,9 +31,11 @@ const pipelineSteps: PipelineStep[] = [
   {
     id: 'sfu',
     title: 'LiveKit SFU',
+    shortTitle: 'LiveKit SFU',
     subtitle: 'Media Routing Fabric',
     protocol: 'WebRTC Selective Forwarding',
     latency: '35ms',
+    badgeLatency: '35ms',
     desc: 'High-throughput distribution layer with low jitter buffers and dynamic network bandwidth adaptation.',
     icon: Radio,
     activeColor: '#00E5C7',
@@ -37,9 +43,11 @@ const pipelineSteps: PipelineStep[] = [
   {
     id: 'stt',
     title: 'STT Transcription',
+    shortTitle: 'STT Stream',
     subtitle: 'Whisper & Sarvam AI',
     protocol: 'Async Streaming WebSockets',
     latency: '110ms',
+    badgeLatency: '110ms',
     desc: 'Fast acoustic-to-token inference with specialized Hindi/English code-switching acoustic dictionaries.',
     icon: Zap,
     activeColor: '#00E5C7',
@@ -47,9 +55,11 @@ const pipelineSteps: PipelineStep[] = [
   {
     id: 'gpt4o',
     title: 'GPT-4o Reasoning',
+    shortTitle: 'GPT-4o Reason',
     subtitle: 'Dialog State Machine',
     protocol: 'Token Stream Server-Sent Events',
     latency: '180ms TTFT',
+    badgeLatency: '180ms',
     desc: 'Adaptive multi-turn state machine with repeat-request interceptors to eradicate topic drift and task stalls.',
     icon: Cpu,
     activeColor: '#00E5C7',
@@ -57,9 +67,11 @@ const pipelineSteps: PipelineStep[] = [
   {
     id: 'eval',
     title: 'Evaluation Layer',
+    shortTitle: 'Eval Layer',
     subtitle: 'gpt-4o-mini Validity Gate',
     protocol: 'Deterministic JSON Schema',
     latency: '45ms (Async)',
+    badgeLatency: '45ms',
     desc: 'LLM-as-a-Judge answer validity gate with fail-open resiliency to intercept hallucinations before scoring.',
     icon: ShieldCheck,
     activeColor: '#00E5C7',
@@ -67,9 +79,11 @@ const pipelineSteps: PipelineStep[] = [
   {
     id: 'redis',
     title: 'Redis Checkpointing',
+    shortTitle: 'Redis State',
     subtitle: '24h State Persistence',
     protocol: 'RESP3 in-memory hash',
     latency: '<2ms',
+    badgeLatency: '<2ms',
     desc: 'Session checkpointing with 24-hour buffer guaranteeing zero data loss during network dropouts.',
     icon: Database,
     activeColor: '#00E5C7',
@@ -77,9 +91,11 @@ const pipelineSteps: PipelineStep[] = [
   {
     id: 'tts',
     title: 'TTS Audio Return',
+    shortTitle: 'TTS Return',
     subtitle: 'ElevenLabs & Sarvam AI',
     protocol: 'PCM Chunk Streaming',
     latency: '85ms',
+    badgeLatency: '85ms',
     desc: 'Pre-generated audio warmup gates streaming initial audio tokens before full generation terminates.',
     icon: Volume2,
     activeColor: '#00E5C7',
@@ -101,7 +117,7 @@ export default function VoiceAIPipelineDiagram() {
   const activeStep = pipelineSteps[activeStepIndex]
 
   return (
-    <div className="w-full glass-panel rounded-2xl p-5 sm:p-6 space-y-5 border border-white/10 relative overflow-hidden">
+    <div className="w-full glass-panel rounded-2xl p-4 sm:p-5 lg:p-5 space-y-5 border border-white/10 relative overflow-hidden">
       {/* Subtle Background Glow */}
       <div className="ambient-glow-accent -top-20 -right-20 opacity-40 pointer-events-none" />
 
@@ -134,7 +150,7 @@ export default function VoiceAIPipelineDiagram() {
       </div>
 
       {/* Step Flow Nodes (Horizontal on lg, 2-col on mobile) */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 relative z-10">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-1.5 sm:gap-2 relative z-10">
         {pipelineSteps.map((step, idx) => {
           const Icon = step.icon
           const isActive = idx === activeStepIndex
@@ -145,14 +161,15 @@ export default function VoiceAIPipelineDiagram() {
                 setActiveStepIndex(idx)
                 setAutoPlay(false)
               }}
-              className={`p-2.5 rounded-xl text-left transition-all duration-300 flex flex-col justify-between relative group ${
+              title={step.title}
+              className={`px-1.5 py-2 sm:px-2 sm:py-2.5 rounded-xl text-left transition-all duration-300 flex flex-col justify-between relative group min-w-0 overflow-hidden ${
                 isActive
                   ? 'bg-accent/10 border border-accent/60 shadow-[0_0_15px_rgba(0,229,199,0.2)]'
                   : 'bg-white/[0.02] border border-white/[0.06] hover:border-white/20'
               }`}
             >
               {/* Active Indicator Top Pill */}
-              <div className="flex items-center justify-between w-full mb-1.5">
+              <div className="flex items-center justify-between w-full mb-1.5 min-w-0">
                 <span
                   className={`font-mono text-[9px] font-bold ${
                     isActive ? 'text-accent' : 'text-muted'
@@ -161,7 +178,7 @@ export default function VoiceAIPipelineDiagram() {
                   0{idx + 1}
                 </span>
                 <div
-                  className={`w-5 h-5 rounded-lg flex items-center justify-center transition-colors ${
+                  className={`w-5 h-5 shrink-0 rounded-lg flex items-center justify-center transition-colors ${
                     isActive
                       ? 'bg-accent text-slate-950 shadow-sm'
                       : 'bg-white/[0.05] text-secondary group-hover:text-white'
@@ -171,16 +188,16 @@ export default function VoiceAIPipelineDiagram() {
                 </div>
               </div>
 
-              <div>
+              <div className="min-w-0 w-full">
                 <p
-                  className={`font-mono text-[10px] font-bold leading-tight ${
+                  className={`font-sans text-[10px] sm:text-[11px] font-semibold leading-tight tracking-tight break-words ${
                     isActive ? 'text-white' : 'text-slate-300'
                   }`}
                 >
-                  {step.title}
+                  {step.shortTitle}
                 </p>
                 <p className="font-mono text-[9px] text-muted truncate mt-0.5">
-                  {step.latency}
+                  {step.badgeLatency}
                 </p>
               </div>
 
@@ -188,7 +205,7 @@ export default function VoiceAIPipelineDiagram() {
               {isActive && (
                 <motion.div
                   layoutId="activePipelineIndicator"
-                  className="absolute bottom-0 left-2 right-2 h-[2px] bg-accent rounded-full"
+                  className="absolute bottom-0 left-1.5 right-1.5 h-[2px] bg-accent rounded-full"
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
               )}
